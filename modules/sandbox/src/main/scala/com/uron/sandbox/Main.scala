@@ -27,10 +27,10 @@ object Main extends UsesCandlestickSubscriber with UsesTickerSubscriber with Use
       case Some(p) =>
         implicit val pubnub: Pubnub = p
         candlestickSubscriber.subscribe()
-        tickerSubscriber.subscribe()
-        depthSubscriber.subscribe()
-        depthSubscriber.subscribe()
-        transactionsSubscriber.subscribe()
+//        tickerSubscriber.subscribe()
+//        depthSubscriber.subscribe()
+//        depthSubscriber.subscribe()
+//        transactionsSubscriber.subscribe()
       case None => println("Please Set BITBANK_PUBLISH_KEY and BITBANK_SUBSCRIBE_KEY")
     }
   }
