@@ -12,7 +12,6 @@ trait BbotSubscriber[M] {
 
   def _successCallback(channel: String, message: Object)(implicit m: Manifest[M]): Unit = {
     implicit val formats = messageFormat
-    println(message)
     val json = parse(message.asInstanceOf[JSONObject].toString)
     println(json.extract[M])
   }

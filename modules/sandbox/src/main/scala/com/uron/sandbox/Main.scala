@@ -9,7 +9,12 @@ object Main extends UsesCandlestickSubscriber with UsesTickerSubscriber with Use
 
   implicit class RichConfig(val underlying: Config) extends AnyVal {
     def getOptionalString(path: String): Option[String] = if (underlying.hasPath(path)) {
-      Some(underlying.getString(path))
+      val string = underlying.getString(path)
+      if (string.isEmpty) {
+        None
+      } else {
+        Some(underlying.getString(path))
+      }
     } else {
       None
     }
@@ -27,10 +32,9 @@ object Main extends UsesCandlestickSubscriber with UsesTickerSubscriber with Use
       case Some(p) =>
         implicit val pubnub: Pubnub = p
         candlestickSubscriber.subscribe()
-//        tickerSubscriber.subscribe()
-//        depthSubscriber.subscribe()
-//        depthSubscriber.subscribe()
-//        transactionsSubscriber.subscribe()
+        tickerSubscriber.subscribe()
+        depthSubscriber.subscribe()
+        transactionsSubscriber.subscribe()
       case None => println("Please Set BITBANK_PUBLISH_KEY and BITBANK_SUBSCRIBE_KEY")
     }
   }
